@@ -1,5 +1,5 @@
 export type TeamSide = 'left' | 'right'
-export type NumberSet = 'standard' | 'wide' | 'extended'
+export type NumberSet = 'standard' | 'extended' | 'tactics' | 'minnesota'
 export type ScoreMode = 'cricket' | 'no-score'
 
 export interface CricketNumber {

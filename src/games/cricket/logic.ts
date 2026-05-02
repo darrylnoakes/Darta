@@ -16,7 +16,7 @@ const STANDARD_NUMBERS: CricketNumber[] = [
   { id: 'Bull', label: 'Bull', scoreValue: 25 },
 ]
 
-const WIDE_NUMBERS: CricketNumber[] = [
+const EXTENDED_NUMBERS: CricketNumber[] = [
   { id: '20', label: '20', scoreValue: 20 },
   { id: '19', label: '19', scoreValue: 19 },
   { id: '18', label: '18', scoreValue: 18 },
@@ -31,7 +31,7 @@ const WIDE_NUMBERS: CricketNumber[] = [
   { id: 'Bull', label: 'Bull', scoreValue: 25 },
 ]
 
-function buildExtendedNumbers(): CricketNumber[] {
+function buildMinnesotaNumbers(): CricketNumber[] {
   const base: CricketNumber[] = [...STANDARD_NUMBERS]
   for (const n of [20, 19, 18, 17, 16, 15]) {
     base.push({ id: `D${n}`, label: `D${n}`, scoreValue: n * 2 })
@@ -42,9 +42,18 @@ function buildExtendedNumbers(): CricketNumber[] {
   return base
 }
 
+function buildTacticsNumbers(): CricketNumber[] {
+  return [
+    ...STANDARD_NUMBERS,
+    { id: 'Doubles', label: 'Doubles', scoreValue: 0 },
+    { id: 'Triples', label: 'Triples', scoreValue: 0 },
+  ]
+}
+
 export function getNumbers(settings: CricketSettings): CricketNumber[] {
-  if (settings.numberSet === 'extended') return buildExtendedNumbers()
-  if (settings.numberSet === 'wide') return [...WIDE_NUMBERS]
+  if (settings.numberSet === 'minnesota') return buildMinnesotaNumbers()
+  if (settings.numberSet === 'tactics') return buildTacticsNumbers()
+  if (settings.numberSet === 'extended') return [...EXTENDED_NUMBERS]
   return [...STANDARD_NUMBERS]
 }
 
