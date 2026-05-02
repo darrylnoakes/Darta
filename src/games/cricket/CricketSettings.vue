@@ -50,17 +50,6 @@ function confirmReset() {
           <span class="option__label">Standard</span>
           <span class="option__hint">20–15 + Bull</span>
         </label>
-        <label class="option" :class="{ 'option--active': local.numberSet === 'wide' }">
-          <input
-            type="radio"
-            name="numberSet"
-            value="wide"
-            :checked="local.numberSet === 'wide'"
-            @change="setNumberSet('wide')"
-          />
-          <span class="option__label">Wide</span>
-          <span class="option__hint">20–10 + Bull</span>
-        </label>
         <label class="option" :class="{ 'option--active': local.numberSet === 'extended' }">
           <input
             type="radio"
@@ -70,7 +59,29 @@ function confirmReset() {
             @change="setNumberSet('extended')"
           />
           <span class="option__label">Extended</span>
+          <span class="option__hint">20–10 + Bull</span>
+        </label>
+        <label class="option" :class="{ 'option--active': local.numberSet === 'tactics' }">
+          <input
+            type="radio"
+            name="numberSet"
+            value="tactics"
+            :checked="local.numberSet === 'tactics'"
+            @change="setNumberSet('tactics')"
+          />
+          <span class="option__label">Tactics</span>
           <span class="option__hint">+ Doubles & Triples</span>
+        </label>
+        <label class="option" :class="{ 'option--active': local.numberSet === 'minnesota' }">
+          <input
+            type="radio"
+            name="numberSet"
+            value="minnesota"
+            :checked="local.numberSet === 'minnesota'"
+            @change="setNumberSet('minnesota')"
+          />
+          <span class="option__label">Minnesota</span>
+          <span class="option__hint">+ D & T individually</span>
         </label>
       </div>
     </section>

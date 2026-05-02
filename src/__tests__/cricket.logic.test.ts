@@ -13,7 +13,8 @@ import {
 import type { CricketRowState, CricketSettings } from '@/types/cricket'
 
 const standard: CricketSettings = { numberSet: 'standard', scoreMode: 'cricket' }
-const extended: CricketSettings = { numberSet: 'extended', scoreMode: 'cricket' }
+const minnesota: CricketSettings = { numberSet: 'minnesota', scoreMode: 'cricket' }
+const tactics: CricketSettings = { numberSet: 'tactics', scoreMode: 'cricket' }
 const noScore: CricketSettings = { numberSet: 'standard', scoreMode: 'no-score' }
 
 function findRow(rows: CricketRowState[], id: string): CricketRowState {
@@ -29,11 +30,24 @@ describe('buildRows', () => {
     expect(rows.map((r) => r.number.id)).toEqual(['20', '19', '18', '17', '16', '15', 'Bull'])
   })
 
-  it('produces 19 rows in extended mode', () => {
-    const rows = buildRows(extended)
+  it('produces 19 rows in minnesota mode', () => {
+    const rows = buildRows(minnesota)
     expect(rows).toHaveLength(7 + 6 + 6)
     expect(rows.map((r) => r.number.id)).toContain('D20')
     expect(rows.map((r) => r.number.id)).toContain('T15')
+  })
+
+  it('produces 9 rows in tactics mode', () => {
+    const rows = buildRows(tactics)
+    expect(rows).toHaveLength(9)
+    expect(rows.map((r) => r.number.id)).toContain('Doubles')
+    expect(rows.map((r) => r.number.id)).toContain('Triples')
+  })
+
+  it('Tactics Doubles and Triples have scoreValue 0', () => {
+    const rows = buildRows(tactics)
+    expect(findRow(rows, 'Doubles').number.scoreValue).toBe(0)
+    expect(findRow(rows, 'Triples').number.scoreValue).toBe(0)
   })
 
   it('Bull has scoreValue 25', () => {
@@ -42,7 +56,7 @@ describe('buildRows', () => {
   })
 
   it('Doubles score 2x and Triples score 3x', () => {
-    const rows = buildRows(extended)
+    const rows = buildRows(minnesota)
     expect(findRow(rows, 'D20').number.scoreValue).toBe(40)
     expect(findRow(rows, 'T20').number.scoreValue).toBe(60)
   })
