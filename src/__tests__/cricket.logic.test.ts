@@ -98,11 +98,11 @@ describe('getScoringHits', () => {
     expect(getScoringHits(row, 'left')).toBe(3)
   })
 
-  it('returns 0 when opponent has closed (regardless of own hits)', () => {
+  it('retains scoring hits once opponent closes', () => {
     const row = buildRows(standard)[0]
     row.left.hits = 7
     row.right.hits = 3
-    expect(getScoringHits(row, 'left')).toBe(0)
+    expect(getScoringHits(row, 'left')).toBe(4)
   })
 })
 
@@ -136,12 +136,12 @@ describe('computeScores', () => {
     expect(computeScores(rows, standard)).toEqual({ left: 59, right: 25 })
   })
 
-  it('stops scoring once opponent closes', () => {
+  it('retains score once opponent closes', () => {
     const rows = buildRows(standard)
     const r = findRow(rows, '20')
-    r.left.hits = 5 // had 2 scoring hits
+    r.left.hits = 5 // 2 scoring hits
     r.right.hits = 3 // closes the number
-    expect(computeScores(rows, standard).left).toBe(0)
+    expect(computeScores(rows, standard).left).toBe(40)
   })
 })
 
@@ -186,21 +186,9 @@ describe('allClosed / checkWinner', () => {
       r.left.hits = 3
       r.right.hits = 3
     }
-    findRow(rows, '20').left.hits = 5 // score 40 before close
-    // But right has hits=3 so it's closed; left scoring is 0. Use mid-game closure logic.
-    // To grant left a score we close after left has scored: simulate by giving left 5 first, then right 3.
-    // Since the data model doesn't track ordering, we treat it as: left.hits=5, right.hits<3 to score.
-    // Reset and do a clean test:
-    const rows2 = buildRows(standard)
-    for (const r of rows2) {
-      r.left.hits = 3
-      r.right.hits = 3
-    }
-    // To award left points, set right < 3 on one row and inflate left there
-    rows2[0].right.hits = 2
-    rows2[0].left.hits = 6
-    // Now not all rows are closed
-    expect(checkWinner(rows2, standard)).toBe(null)
+    // left scored 40 on '20' before right closed it
+    findRow(rows, '20').left.hits = 5
+    expect(checkWinner(rows, standard)).toBe('left')
   })
 
   it('checkWinner returns "tie" in no-score mode when all closed', () => {
