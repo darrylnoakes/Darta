@@ -16,6 +16,21 @@ const STANDARD_NUMBERS: CricketNumber[] = [
   { id: 'Bull', label: 'Bull', scoreValue: 25 },
 ]
 
+const WIDE_NUMBERS: CricketNumber[] = [
+  { id: '20', label: '20', scoreValue: 20 },
+  { id: '19', label: '19', scoreValue: 19 },
+  { id: '18', label: '18', scoreValue: 18 },
+  { id: '17', label: '17', scoreValue: 17 },
+  { id: '16', label: '16', scoreValue: 16 },
+  { id: '15', label: '15', scoreValue: 15 },
+  { id: '14', label: '14', scoreValue: 14 },
+  { id: '13', label: '13', scoreValue: 13 },
+  { id: '12', label: '12', scoreValue: 12 },
+  { id: '11', label: '11', scoreValue: 11 },
+  { id: '10', label: '10', scoreValue: 10 },
+  { id: 'Bull', label: 'Bull', scoreValue: 25 },
+]
+
 function buildExtendedNumbers(): CricketNumber[] {
   const base: CricketNumber[] = [...STANDARD_NUMBERS]
   for (const n of [20, 19, 18, 17, 16, 15]) {
@@ -28,7 +43,9 @@ function buildExtendedNumbers(): CricketNumber[] {
 }
 
 export function getNumbers(settings: CricketSettings): CricketNumber[] {
-  return settings.numberSet === 'extended' ? buildExtendedNumbers() : [...STANDARD_NUMBERS]
+  if (settings.numberSet === 'extended') return buildExtendedNumbers()
+  if (settings.numberSet === 'wide') return [...WIDE_NUMBERS]
+  return [...STANDARD_NUMBERS]
 }
 
 export function buildRows(settings: CricketSettings): CricketRowState[] {

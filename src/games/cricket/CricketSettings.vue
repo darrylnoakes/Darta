@@ -50,6 +50,17 @@ function confirmReset() {
           <span class="option__label">Standard</span>
           <span class="option__hint">20–15 + Bull</span>
         </label>
+        <label class="option" :class="{ 'option--active': local.numberSet === 'wide' }">
+          <input
+            type="radio"
+            name="numberSet"
+            value="wide"
+            :checked="local.numberSet === 'wide'"
+            @change="setNumberSet('wide')"
+          />
+          <span class="option__label">Wide</span>
+          <span class="option__hint">20–10 + Bull</span>
+        </label>
         <label class="option" :class="{ 'option--active': local.numberSet === 'extended' }">
           <input
             type="radio"
