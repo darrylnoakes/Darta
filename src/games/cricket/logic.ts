@@ -47,17 +47,9 @@ export function isClosed(row: CricketRowState): boolean {
   return row.left.hits >= 3 && row.right.hits >= 3
 }
 
-function opposite(side: TeamSide): TeamSide {
-  return side === 'left' ? 'right' : 'left'
-}
-
-/**
- * Hits beyond the opening 3 that score points.
- * Only hits accrued while the opponent has not yet closed the number count.
- */
+/** Hits beyond the opening 3 that score points. */
 export function getScoringHits(row: CricketRowState, side: TeamSide): number {
   if (row[side].hits <= 3) return 0
-  if (row[opposite(side)].hits >= 3) return 0
   return row[side].hits - 3
 }
 
