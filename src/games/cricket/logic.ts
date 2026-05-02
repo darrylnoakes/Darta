@@ -13,7 +13,7 @@ const STANDARD_NUMBERS: CricketNumber[] = [
   { id: '17', label: '17', scoreValue: 17 },
   { id: '16', label: '16', scoreValue: 16 },
   { id: '15', label: '15', scoreValue: 15 },
-  { id: 'Bull', label: 'Bull', scoreValue: 25 },
+  { id: 'Bull', label: 'B', scoreValue: 25 },
 ]
 
 const EXTENDED_NUMBERS: CricketNumber[] = [
@@ -28,7 +28,7 @@ const EXTENDED_NUMBERS: CricketNumber[] = [
   { id: '12', label: '12', scoreValue: 12 },
   { id: '11', label: '11', scoreValue: 11 },
   { id: '10', label: '10', scoreValue: 10 },
-  { id: 'Bull', label: 'Bull', scoreValue: 25 },
+  { id: 'Bull', label: 'B', scoreValue: 25 },
 ]
 
 function buildMinnesotaNumbers(): CricketNumber[] {
@@ -45,8 +45,8 @@ function buildMinnesotaNumbers(): CricketNumber[] {
 function buildTacticsNumbers(): CricketNumber[] {
   return [
     ...STANDARD_NUMBERS,
-    { id: 'Doubles', label: 'Doubles', scoreValue: 0 },
-    { id: 'Triples', label: 'Triples', scoreValue: 0 },
+    { id: 'Doubles', label: 'D', scoreValue: 0 },
+    { id: 'Triples', label: 'T', scoreValue: 0 },
   ]
 }
 
