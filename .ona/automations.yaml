@@ -1,0 +1,15 @@
+tasks:
+  installDeps:
+    name: Install dependencies
+    description: Install npm dependencies.
+    command: npm install
+    triggeredBy:
+      - postDevcontainerStart
+
+services:
+  dev-server:
+    name: Dev Server
+    description: Vite development server.
+    commands:
+      start: npm run dev -- --host
+      ready: curl -sf http://localhost:5173
